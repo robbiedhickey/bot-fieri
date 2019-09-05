@@ -1,11 +1,12 @@
 import getRandomElement from "../util/getRandomElement";
 
-const quotes = require("./quotes.json");
+const quotes = require("../data/quotes.json");
 
 export function getAllQuotes() {
   return quotes;
 }
 
 export function getRandomQuote() {
-  return getRandomElement(quotes);
+  let quote = getRandomElement(quotes);
+  return `> ${quote}`;
 }
