@@ -7,5 +7,6 @@ export function getAllQuotes() {
 }
 
 export function getRandomQuote() {
-  return getRandomElement(quotes);
+  let quote = getRandomElement(quotes);
+  return `> ${quote}`;
 }
