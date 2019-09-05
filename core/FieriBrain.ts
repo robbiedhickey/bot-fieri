@@ -17,7 +17,8 @@ export default class FieriBrain {
     this.request = request;
     this.response = response;
     this.channel = _.get(request, "body.event.channel");
-    this.messageText = _.get(request, "body.event.text");
+    this.messageText =
+      _.get(request, "body.event.text") || _.get(request, "query.text");
     this.sentByUser = _.get(request, "body.event.user");
     this.replyType = this.determineIntent(this.messageText || "");
   }
