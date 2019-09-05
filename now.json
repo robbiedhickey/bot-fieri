@@ -1,0 +1,5 @@
+{
+  "env": {
+    "SLACK_OAUTH_TOKEN": "@slack_oauth_token"
+  }
+}
