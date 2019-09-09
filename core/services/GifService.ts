@@ -1,9 +1,9 @@
-import getRandomElement from "../util/getRandomElement";
+import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
 
 // https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/
 // "Guy Fieri Gifs"
-const gifs = require("../data/gifs.json");
+const gifs = require("../../data/gifs.json");
 
 export function getAllGifs() {
   return gifs;
@@ -13,7 +13,7 @@ export function getRandomGif(): ChatPostMessageArguments {
   let gif = getRandomElement(gifs);
 
   return {
-    text: `> ${gif.name}`,
+    text: "",
     channel: "",
     attachments: [
       {

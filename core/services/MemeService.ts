@@ -1,9 +1,9 @@
-import getRandomElement from "../util/getRandomElement";
+import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
 
 // https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/
 // "Guy Fieri Memes"
-const memes = require("../data/memes.json");
+const memes = require("../../data/memes.json");
 
 export function getAllMemes() {
   return memes;
@@ -13,7 +13,7 @@ export function getRandomMeme(): ChatPostMessageArguments {
   let meme = getRandomElement(memes);
 
   return {
-    text: `> ${meme.name}`,
+    text: "",
     channel: "",
     attachments: [
       {

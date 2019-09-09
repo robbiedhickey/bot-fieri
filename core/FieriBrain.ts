@@ -1,9 +1,11 @@
 import { NowRequest, NowResponse } from "@now/node";
 import _ from "lodash";
-import { getRandomQuote } from "./QuoteService";
-import { getRandomTweet } from "./TweetService";
-import { getRandomPhotoshop } from "./PhotoshopService";
-import { getRandomMeme } from "./MemeService";
+import { getRandomQuote } from "./services/QuoteService";
+import { getRandomTweet } from "./services/TweetService";
+import { getRandomPhotoshop } from "./services/PhotoshopService";
+import { getRandomMeme } from "./services/MemeService";
+import { getRandomGif } from "./services/GifService";
+import { getHelp } from "./services/HelpService";
 import SlackClient from "./SlackClient";
 import * as types from "./Types";
 
@@ -29,11 +31,17 @@ export default class FieriBrain {
     let response = { text: "", channel: "" };
 
     switch (this.replyType) {
+      case types.HELP:
+        response = getHelp();
+        break;
       case types.PHOTOSHOP:
         response = getRandomPhotoshop();
         break;
       case types.MEME:
         response = getRandomMeme();
+        break;
+      case types.GIF:
+        response = getRandomGif();
         break;
       case types.QUOTE:
         response = getRandomQuote();
@@ -65,6 +73,10 @@ export default class FieriBrain {
   }
 
   determineIntent(message) {
+    if (message.match(/help/gi)) {
+      return types.HELP;
+    }
+
     if (message.match(/shop|photoshop|face|transplant/gi)) {
       return types.PHOTOSHOP;
     }

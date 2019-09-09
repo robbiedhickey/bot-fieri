@@ -1,7 +1,7 @@
-import getRandomElement from "../util/getRandomElement";
+import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
 
-const tweets = require("../data/tweets.json");
+const tweets = require("../../data/tweets.json");
 
 const topNTweets = 200 || process.env.TOP_N_TWEETS;
 

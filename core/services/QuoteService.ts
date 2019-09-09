@@ -1,7 +1,7 @@
-import getRandomElement from "../util/getRandomElement";
+import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
 
-const quotes = require("../data/quotes.json");
+const quotes = require("../../data/quotes.json");
 
 export function getAllQuotes() {
   return quotes;
