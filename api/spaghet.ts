@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   console.log(`Received request with body: ${JSON.stringify(req.body)}`);
 
   let bugSummary = _.get(req.body, "message.text");
-  let createdByAkbar = bugSummary || bugSummary.match(/akbar/gi);
+  let createdByAkbar = bugSummary && bugSummary.match(/akbar/gi);
 
   if (createdByAkbar) {
     await SlackClient.chat.postMessage({
