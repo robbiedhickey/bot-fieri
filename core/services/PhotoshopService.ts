@@ -10,6 +10,7 @@ export function getAllPhotoShops() {
 }
 
 export function getRandomPhotoshop(): ChatPostMessageArguments {
+  console.log(photoshops.length);
   let photoshop = getRandomElement(photoshops);
 
   return {
