@@ -3,6 +3,7 @@ import _ from "lodash";
 import { getRandomQuote } from "./QuoteService";
 import { getRandomTweet } from "./TweetService";
 import { getRandomPhotoshop } from "./PhotoshopService";
+import { getRandomMeme } from "./MemeService";
 import SlackClient from "./SlackClient";
 import * as types from "./Types";
 
@@ -30,6 +31,9 @@ export default class FieriBrain {
     switch (this.replyType) {
       case types.PHOTOSHOP:
         response = getRandomPhotoshop();
+        break;
+      case types.MEME:
+        response = getRandomMeme();
         break;
       case types.QUOTE:
         response = getRandomQuote();
@@ -63,6 +67,14 @@ export default class FieriBrain {
   determineIntent(message) {
     if (message.match(/shop|photoshop|face|transplant/gi)) {
       return types.PHOTOSHOP;
+    }
+
+    if (message.match(/meme/gi)) {
+      return types.MEME;
+    }
+
+    if (message.match(/gif/gi)) {
+      return types.GIF;
     }
 
     if (message.match(/twitter|tweet|tweets|twit|tweeter/gi)) {

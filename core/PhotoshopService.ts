@@ -2,6 +2,7 @@ import getRandomElement from "../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
 
 // https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/
+// "Guy Fieri Photoshops"
 const photoshops = require("../data/photoshops.json");
 
 export function getAllPhotoShops() {
