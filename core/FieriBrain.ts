@@ -40,7 +40,9 @@ export default class FieriBrain {
 
       await SlackClient.chat.postMessage({
         channel: this.channel,
-        text: responseText
+        text: responseText,
+        unfurl_links: true,
+        unforl_media: true
       });
     }
 
