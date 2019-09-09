@@ -9,6 +9,10 @@ const topTweets = tweets
   .sort((a, b) => a.likes_count < b.likes_count)
   .slice(0, topNTweets);
 
+export function topTweets() {
+  return topTweets;
+}
+
 export function getRandomTweet(): ChatPostMessageArguments {
   let tweetRecord = getRandomElement(topTweets);
 
