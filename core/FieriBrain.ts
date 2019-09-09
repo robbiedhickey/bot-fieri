@@ -2,6 +2,7 @@ import { NowRequest, NowResponse } from "@now/node";
 import _ from "lodash";
 import { getRandomQuote } from "./QuoteService";
 import { getRandomTweet } from "./TweetService";
+import { getRandomPhotoshop } from "./PhotoshopService";
 import SlackClient from "./SlackClient";
 import * as types from "./Types";
 
@@ -27,6 +28,9 @@ export default class FieriBrain {
     let response = { text: "", channel: "" };
 
     switch (this.replyType) {
+      case types.PHOTOSHOP:
+        response = getRandomPhotoshop();
+        break;
       case types.QUOTE:
         response = getRandomQuote();
         break;
@@ -57,6 +61,10 @@ export default class FieriBrain {
   }
 
   determineIntent(message) {
+    if (message.match(/shop|photoshop|face|transplant/gi)) {
+      return types.PHOTOSHOP;
+    }
+
     if (message.match(/twitter|tweet|tweets|twit|tweeter/gi)) {
       return types.TWEET;
     }
