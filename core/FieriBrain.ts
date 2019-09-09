@@ -3,7 +3,7 @@ import _ from "lodash";
 import { getRandomQuote } from "./QuoteService";
 import { getRandomTweet } from "./TweetService";
 import SlackClient from "./SlackClient";
-import * as replyTypes from "./ReplyTypes";
+import * as types from "./Types";
 
 export default class FieriBrain {
   request: NowRequest;
@@ -24,40 +24,43 @@ export default class FieriBrain {
   }
 
   async takeMeToFlavortown() {
-    let responseText = "";
+    let response = { text: "", channel: "" };
 
     switch (this.replyType) {
-      case replyTypes.QUOTE:
-        responseText = getRandomQuote();
+      case types.QUOTE:
+        response = getRandomQuote();
         break;
-      case replyTypes.TWEET:
-        responseText = getRandomTweet();
+      case types.TWEET:
+        response = getRandomTweet();
         break;
     }
 
     if (this.channel) {
       console.log(`Sending slack message to channel ${this.channel}`);
 
-      await SlackClient.chat.postMessage({
+      response = Object.assign({}, response, {
         channel: this.channel,
-        text: responseText,
         unfurl_links: true,
-        unforl_media: true
+        unfurl_media: true
       });
+
+      await SlackClient.chat.postMessage(response);
     }
 
     console.log(
-      `Returning response of type ${this.replyType}: "${responseText}"`
+      `Returning response of type ${this.replyType}: "${JSON.stringify(
+        response
+      )}"`
     );
 
-    this.response.status(200).send(responseText);
+    this.response.status(200).send(response);
   }
 
   determineIntent(message) {
     if (message.match(/twitter|tweet|tweets|twit|tweeter/gi)) {
-      return replyTypes.TWEET;
+      return types.TWEET;
     }
 
-    return replyTypes.QUOTE;
+    return types.QUOTE;
   }
 }

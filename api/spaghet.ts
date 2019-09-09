@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
       channel: "CMR5KT4KW",
       text: `${bugSummary} \n\n https://www.youtube.com/watch?v=cE1FrqheQNI`,
       unfurl_links: true,
-      unforl_media: true,
+      unfurl_media: true,
       username: "SNACKBAR"
     });
   }
