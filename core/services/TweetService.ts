@@ -3,7 +3,7 @@ import { ChatPostMessageArguments } from "@slack/web-api";
 
 const tweets = require("../../data/tweets.json");
 
-const topNTweets = 200 || process.env.TOP_N_TWEETS;
+const topNTweets = 100 || process.env.TOP_N_TWEETS;
 
 const topTweets = tweets
   .sort((a, b) => a.likes_count < b.likes_count)
