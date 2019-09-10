@@ -5,7 +5,7 @@ import { ChatPostMessageArguments } from "@slack/web-api";
 // "Guy Fieri Photoshops"
 const photoshops = require("../../data/photoshops.json");
 
-export function getAllPhotoShops() {
+export function getAllPhotoshops() {
   return photoshops;
 }
 
