@@ -1,12 +1,12 @@
-import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
+import _ from "lodash";
+import getRandomElement from "../../util/getRandomElement";
 
 const tweets = require("../../data/tweets.json");
 
 const topNTweets = 100 || process.env.TOP_N_TWEETS;
 
-const topTweets = tweets
-  .sort((a, b) => a.likes_count < b.likes_count)
+const topTweets = _.orderBy(tweets, ["likes_count"], ["desc"])
   .slice(0, topNTweets);
 
 export function getTopTweets() {
