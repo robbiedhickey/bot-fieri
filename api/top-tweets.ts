@@ -1,5 +1,5 @@
-import { topTweets } from "../core/services/TweetService";
+import { getTopTweets } from "../core/services/TweetService";
 
 module.exports = (req, res) => {
-  res.status(200).json(topTweets());
+  res.status(200).json(getTopTweets());
 };
