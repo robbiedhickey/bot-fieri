@@ -8,7 +8,7 @@ const topNTweets = process.env.TOP_N_TWEETS || 100;
 
 const topTweets = _.orderBy(tweets, ["likes_count"], ["desc"]).slice(
   0,
-  topNTweets
+  Number(topNTweets)
 );
 
 export function getTopTweets() {
