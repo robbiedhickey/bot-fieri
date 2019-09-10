@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
       text: `${bugSummary} \n\n https://www.youtube.com/watch?v=cE1FrqheQNI`,
       unfurl_links: true,
       unfurl_media: true,
-      username: "SNACKBAR"
+      username: "SNAKBAR"
     });
   }
 

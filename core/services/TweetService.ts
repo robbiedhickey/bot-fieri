@@ -4,10 +4,12 @@ import getRandomElement from "../../util/getRandomElement";
 
 const tweets = require("../../data/tweets.json");
 
-const topNTweets = 100 || process.env.TOP_N_TWEETS;
+const topNTweets = process.env.TOP_N_TWEETS || 100;
 
-const topTweets = _.orderBy(tweets, ["likes_count"], ["desc"])
-  .slice(0, topNTweets);
+const topTweets = _.orderBy(tweets, ["likes_count"], ["desc"]).slice(
+  0,
+  topNTweets
+);
 
 export function getTopTweets() {
   return topTweets;
