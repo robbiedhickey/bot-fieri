@@ -6,6 +6,7 @@ import { getRandomPhotoshop } from "./services/PhotoshopService";
 import { getRandomMeme } from "./services/MemeService";
 import { getRandomGif } from "./services/GifService";
 import { getHelp } from "./services/HelpService";
+import { getRandomSentence } from "./services/MarkovChainService";
 import SlackClient from "./SlackClient";
 import * as types from "./Types";
 
@@ -31,6 +32,9 @@ export default class FieriBrain {
     let response = { text: "", channel: "" };
 
     switch (this.replyType) {
+      case types.MARKOVCHAIN:
+        response = getRandomSentence(this.messageText);
+        break;
       case types.HELP:
         response = getHelp();
         break;
@@ -91,6 +95,10 @@ export default class FieriBrain {
 
     if (message.match(/twitter|tweet|tweets|twit|tweeter/gi)) {
       return types.TWEET;
+    }
+
+    if (message.match(/markov|chain/gi)) {
+      return types.MARKOVCHAIN;
     }
 
     return types.QUOTE;
