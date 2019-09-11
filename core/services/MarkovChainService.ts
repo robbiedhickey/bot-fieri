@@ -2,7 +2,7 @@ import { ChatPostMessageArguments } from "@slack/web-api";
 import markov from "markov";
 let markovData = require("../../data/markov-data.json");
 
-let markovChain = markov(3);
+let markovChain = markov(4);
 
 markovChain.seed(markovData.join("\n"), function() {
   console.log("Markov chain seeded successfully");
@@ -10,7 +10,7 @@ markovChain.seed(markovData.join("\n"), function() {
 
 export function getRandomSentence(slackText): ChatPostMessageArguments {
   return {
-    text: markovChain.respond(slackText, 5).join(" "),
+    text: markovChain.respond(slackText, 3).join(" "),
     channel: ""
   };
 }
