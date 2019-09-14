@@ -42,7 +42,7 @@ export default class FieriBrain {
         response = getRandomPhotoshop();
         break;
       case types.MEME:
-        response = getRandomMeme();
+        response = await getRandomMeme();
         break;
       case types.GIF:
         response = getRandomGif();

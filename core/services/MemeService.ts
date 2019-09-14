@@ -1,27 +1,21 @@
-import getRandomElement from "../../util/getRandomElement";
+import axios from "axios";
 import { ChatPostMessageArguments } from "@slack/web-api";
+import getRandomElement from "../../util/getRandomElement";
 
-// https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/
-// "Guy Fieri Memes"
-const memes = require("../../data/memes.json");
 
-export function getAllMemes() {
-  return memes;
-}
+export async function getRandomMeme(): Promise<ChatPostMessageArguments> {
+  let memeResponse = await axios.get("https://api.sheety.co/e43a2efb-b367-4a85-ba73-1c3f51b316f1");
+  let meme = getRandomElement(memeResponse.data);
 
-export function getRandomMeme(): ChatPostMessageArguments {
-  let meme = getRandomElement(memes);
-
-  return {
+  return Promise.resolve({
     text: "",
     channel: "",
     attachments: [
       {
-        image_url: meme.contentUrl,
-        thumb_url: meme.thumbnailUrl,
-        text: meme.name,
-        fallback: meme.hostPageDisplayUrl
+        image_url: meme.url,
+        thumb_url: meme.url,
+        text: meme.title     
       }
     ]
-  };
+  });
 }
