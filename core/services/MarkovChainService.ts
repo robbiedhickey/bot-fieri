@@ -2,7 +2,7 @@ import { ChatPostMessageArguments } from "@slack/web-api";
 import markov from "markov";
 let markovData = require("../../data/markov-data.json");
 
-let markovChain = markov(1);
+let markovChain = markov(2);
 
 markovChain.seed(markovData.join("\n"), function() {
   console.log("Markov chain seeded successfully");
