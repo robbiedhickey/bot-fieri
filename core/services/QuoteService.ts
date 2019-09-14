@@ -1,17 +1,19 @@
 import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
+import axios from "axios"
 
-const quotes = require("../../data/quotes.json");
-
-export function getAllQuotes() {
-  return quotes;
+export async function getAllQuotes() : Promise<any> {
+  let quoteResponse = await axios.get("https://api.sheety.co/eda206d7-5d8b-4543-841c-b17bba9109ce");
+  console.log(quoteResponse.data[0]);
+  return Promise.resolve(quoteResponse.data);
 }
 
-export function getRandomQuote(): ChatPostMessageArguments {
-  let quote = getRandomElement(quotes);
+export async function getRandomQuote(): Promise<ChatPostMessageArguments> {
+  let quotes = await getAllQuotes();
+  let quoteRecord = getRandomElement(quotes);
 
-  return {
-    text: `> ${quote}`,
+  return Promise.resolve({
+    text: `> ${quoteRecord.quote}`,
     channel: ""
-  };
+  });
 }

@@ -48,7 +48,7 @@ export default class FieriBrain {
         response = getRandomGif();
         break;
       case types.QUOTE:
-        response = getRandomQuote();
+        response = await getRandomQuote();
         break;
       case types.TWEET:
         response = getRandomTweet();

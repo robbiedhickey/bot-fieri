@@ -1,5 +1,5 @@
 import { getAllMemes } from "../core/services/MemeService";
 
-module.exports = (req, res) => {
-  res.status(200).json(getAllMemes());
+module.exports = async (req, res) => {
+  res.status(200).json(await getAllMemes());
 };
