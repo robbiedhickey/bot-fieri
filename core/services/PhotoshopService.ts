@@ -1,28 +1,26 @@
 import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
+import axios from "axios";
 
-// https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/
-// "Guy Fieri Photoshops"
-const photoshops = require("../../data/photoshops.json");
-
-export function getAllPhotoshops() {
-  return photoshops;
+export async function getAllPhotoshops() : Promise<any> {
+  let photoshopResponse = await axios.get('https://api.sheety.co/97e05d2f-5aa5-4541-9473-6dbc249291a9');
+  return Promise.resolve(photoshopResponse.data);
 }
 
-export function getRandomPhotoshop(): ChatPostMessageArguments {
-  console.log(photoshops.length);
+export async function getRandomPhotoshop(): Promise<ChatPostMessageArguments> {
+  let photoshops = await getAllPhotoshops();
   let photoshop = getRandomElement(photoshops);
 
-  return {
+  return Promise.resolve({
     text: "",
     channel: "",
     attachments: [
       {
-        image_url: photoshop.contentUrl,
-        thumb_url: photoshop.thumbnailUrl,
-        text: photoshop.name,
-        fallback: photoshop.hostPageDisplayUrl
+        image_url: photoshop.url,
+        thumb_url: photoshop.url,
+        text: photoshop.title,
+        fallback: photoshop.title
       }
     ]
-  };
+  });
 }
