@@ -1,27 +1,26 @@
 import getRandomElement from "../../util/getRandomElement";
 import { ChatPostMessageArguments } from "@slack/web-api";
+import axios from "axios";
 
-// https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/
-// "Guy Fieri Gifs"
-const gifs = require("../../data/gifs.json");
-
-export function getAllGifs() {
-  return gifs;
+export async function getAllGifs() : Promise<any> {
+  let gifResponse = await axios.get("https://api.sheety.co/98fd0809-53a7-4ac0-9061-37b10a72619a");
+  return Promise.resolve(gifResponse.data);
 }
 
-export function getRandomGif(): ChatPostMessageArguments {
+export async function getRandomGif(): Promise<ChatPostMessageArguments> {
+  let gifs = await getAllGifs();
   let gif = getRandomElement(gifs);
 
-  return {
+  return Promise.resolve({
     text: "",
     channel: "",
     attachments: [
       {
-        image_url: gif.contentUrl,
-        thumb_url: gif.thumbnailUrl,
-        text: gif.name,
-        fallback: gif.hostPageDisplayUrl
+        image_url: gif.url,
+        thumb_url: gif.url,
+        text: gif.title,
+        fallback: gif.title
       }
     ]
-  };
+  });
 }

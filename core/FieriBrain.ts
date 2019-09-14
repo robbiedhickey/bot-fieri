@@ -45,7 +45,7 @@ export default class FieriBrain {
         response = await getRandomMeme();
         break;
       case types.GIF:
-        response = getRandomGif();
+        response = await getRandomGif();
         break;
       case types.QUOTE:
         response = await getRandomQuote();
