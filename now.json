@@ -1,4 +1,5 @@
 {
+  "name": "fieri-bot",
   "env": {
     "SLACK_OAUTH_TOKEN": "@slack_oauth_token"
   }

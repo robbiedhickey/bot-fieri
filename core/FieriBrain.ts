@@ -64,16 +64,14 @@ export default class FieriBrain {
         unfurl_media: true
       });
 
+      console.log(
+        `Returning response of type ${this.replyType}: "${JSON.stringify(
+          response
+        )}"`
+      );
+
       await SlackClient.chat.postMessage(response);
     }
-
-    console.log(
-      `Returning response of type ${this.replyType}: "${JSON.stringify(
-        response
-      )}"`
-    );
-
-    this.response.status(200).send(response);
   }
 
   determineIntent(message) {
